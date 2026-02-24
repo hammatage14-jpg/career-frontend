@@ -1,0 +1,154 @@
+/* ═══════════════════════════════════════════════════════════════
+   IAS Global Styles — Design Tokens + Reset
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  /* Light theme */
+  --bg:        #F7F4EF;
+  --bg2:       #EDE8DF;
+  --surface:   #FFFFFF;
+  --surface2:  #F0EBE3;
+  --border:    #DDD6C8;
+  --text:      #1A1714;
+  --text2:     #6B6459;
+  --text3:     #7A7268;
+  --accent:    #C75B2B;
+  --on-accent: #FFFFFF;
+  --accent2:   #E8936A;
+  --accent-bg: #FAE6DA;
+  --green:     #2D6A4F;
+  --green-bg:  #D8F3DC;
+  --blue:      #1B4F8A;
+  --blue-bg:   #D6E8F8;
+  --amber:     #92570A;
+  --amber-bg:  #FEF3C7;
+  --red:       #B91C1C;
+  --red-bg:    #FEE2E2;
+  --shadow:    0 2px 8px rgba(26,23,20,.07), 0 8px 32px rgba(26,23,20,.05);
+  --shadow-lg: 0 4px 16px rgba(26,23,20,.10), 0 16px 48px rgba(26,23,20,.08);
+  --radius:    14px;
+  --radius-sm: 8px;
+  --transition: .22s cubic-bezier(.4,0,.2,1);
+}
+
+[data-theme="dark"] {
+  --bg:        #131210;
+  --bg2:       #1C1A17;
+  --surface:   #221F1B;
+  --surface2:  #2A2621;
+  --border:    #38342D;
+  --text:      #F0EBE3;
+  --text2:     #A89E92;
+  --text3:     #9A9187;
+  --on-accent: #FFFFFF;
+  --accent:    #E8795A;
+  --accent2:   #C75B2B;
+  --accent-bg: #2E1A12;
+  --green:     #52B788;
+  --green-bg:  #0E2519;
+  --blue:      #74B3F0;
+  --blue-bg:   #0D1E30;
+  --amber:     #F6C065;
+  --amber-bg:  #241900;
+  --red:       #EF4444;
+  --red-bg:    #2D1515;
+  --shadow:    0 2px 8px rgba(0,0,0,.22), 0 8px 32px rgba(0,0,0,.18);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.30), 0 16px 48px rgba(0,0,0,.24);
+}
+
+/* ─── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  color-scheme: light dark;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ─── FOCUS (accessibility) ──────────────────────────────────── */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-up { animation: fadeUp .5s ease both; }
+.animate-fade-in { animation: fadeIn .3s ease both; }
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }

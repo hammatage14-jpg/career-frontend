@@ -1,0 +1,44 @@
+.content { padding: 24px 32px; }
+.title { font-family: Syne, sans-serif; font-size: 22px; color: var(--text); margin-bottom: 20px; }
+.msg { color: var(--text2); padding: 24px 0; }
+.tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+.tab { padding: 10px 18px; border: 1px solid var(--border); background: var(--surface); color: var(--text2); border-radius: var(--radius-sm); font-size: 14px; cursor: pointer; font-family: inherit; }
+.tab:hover { background: var(--surface2); color: var(--text); }
+.tabActive { padding: 10px 18px; border: 1px solid var(--accent); background: var(--accent-bg); color: var(--accent); border-radius: var(--radius-sm); font-size: 14px; cursor: pointer; font-family: inherit; font-weight: 600; }
+.statsGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.statCard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.statValue { font-size: 28px; font-weight: 700; color: var(--text); display: block; }
+.statLabel { font-size: 13px; color: var(--text2); }
+.toolbar { margin-bottom: 16px; }
+.btnPrimary { padding: 10px 18px; background: var(--accent); color: var(--on-accent); border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.btnPrimary:hover { opacity: 0.9; }
+.btnSecondary { padding: 10px 18px; border: 1px solid var(--border); background: var(--surface); color: var(--text2); border-radius: var(--radius-sm); font-size: 14px; cursor: pointer; font-family: inherit; margin-right: 8px; }
+.formCard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; max-width: 560px; }
+.formTitle { font-size: 18px; color: var(--text); margin-bottom: 16px; }
+.label { display: block; margin-bottom: 12px; font-size: 14px; font-weight: 500; color: var(--text); }
+.input { width: 100%; max-width: 400px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; margin-top: 4px; background: var(--surface); color: var(--text); }
+.textarea { width: 100%; max-width: 400px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; margin-top: 4px; font-family: inherit; resize: vertical; }
+.checkLabel { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 14px; cursor: pointer; }
+.formActions { margin-top: 16px; }
+.tableWrap { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th { text-align: left; padding: 12px 16px; color: var(--text2); font-weight: 600; border-bottom: 1px solid var(--border); }
+.table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
+.badgeActive { padding: 4px 10px; border-radius: 20px; font-size: 12px; background: var(--green-bg); color: var(--green); }
+.badgeInactive { padding: 4px 10px; border-radius: 20px; font-size: 12px; background: var(--surface2); color: var(--text2); }
+.statusPill { padding: 4px 10px; border-radius: 20px; font-size: 12px; }
+.statusPillPending { background: var(--amber-bg); color: var(--amber); }
+.statusPillGreen { background: var(--green-bg); color: var(--green); }
+.statusPillRed { background: var(--red-bg); color: var(--red); }
+.statusSelect { padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 13px; cursor: pointer; min-width: 140px; }
+.statusSelectGreen { background: var(--green-bg); color: var(--green); font-weight: 500; }
+.statusSelectRed { background: var(--red-bg); color: var(--red); font-weight: 500; }
+.docLinks { display: flex; gap: 8px; flex-wrap: wrap; }
+.docLink { color: var(--accent); font-size: 13px; text-decoration: none; }
+.docLink:hover { text-decoration: underline; }
+.email { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.linkBtn { background: none; border: none; color: var(--accent); font-size: 14px; cursor: pointer; text-decoration: underline; padding: 0; }
+.refundBtn { padding: 6px 12px; font-size: 12px; background: transparent; color: var(--text2); border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; }
+.refundBtn:hover { color: var(--red); border-color: var(--red); }
+.refundBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.refunded { font-size: 12px; color: var(--text3); }

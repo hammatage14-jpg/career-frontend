@@ -1,0 +1,23 @@
+.wrap { padding: 32px; max-width: 560px; }
+.title { font-family: Syne, sans-serif; font-size: 22px; color: var(--text); margin-bottom: 6px; }
+.subtitle { font-size: 14px; color: var(--text2); margin-bottom: 24px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.cardTitle { font-family: Syne, sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 16px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.row:last-of-type { border-bottom: none; }
+.label { font-size: 14px; color: var(--text2); }
+.value { font-size: 14px; font-weight: 500; color: var(--text); }
+.badge { font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: var(--green-bg); color: var(--green); }
+.themeOptions { display: flex; gap: 8px; }
+.themeBtn { padding: 8px 16px; font-size: 13px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text2); cursor: pointer; }
+.themeBtn:hover { border-color: var(--text3); color: var(--text); }
+.themeBtn.active { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+.hint { font-size: 13px; color: var(--text3); margin-top: 12px; line-height: 1.5; }
+.hint strong { color: var(--text); }

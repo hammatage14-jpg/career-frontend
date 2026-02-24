@@ -1,0 +1,34 @@
+.wrap { padding: 32px; }
+.title { font-family: Syne, sans-serif; font-size: 22px; color: var(--text); margin-bottom: 6px; }
+.subtitle { font-size: 14px; color: var(--text2); margin-bottom: 24px; max-width: 640px; }
+.grid { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
+@media (max-width: 1000px) { .grid { grid-template-columns: 1fr; } }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.cardHead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.cardTitle { font-family: Syne, sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 16px; }
+.cardHead .cardTitle { margin-bottom: 0; }
+.formSection .card:last-child { margin-bottom: 0; }
+.label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 14px; }
+.label:last-child { margin-bottom: 0; }
+.input, .textarea { padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; background: var(--surface); color: var(--text); font-family: inherit; }
+.input:focus, .textarea:focus { outline: none; border-color: var(--accent); }
+.textarea { resize: vertical; min-height: 60px; }
+.addBtn { padding: 6px 12px; font-size: 12px; font-weight: 500; color: var(--accent); border: 1px solid var(--accent); border-radius: var(--radius-sm); background: transparent; cursor: pointer; }
+.addBtn:hover { background: var(--accent-bg); }
+.block { padding: 14px 0; border-top: 1px solid var(--border); margin-top: 14px; }
+.block:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+.removeBtn { margin-top: 10px; font-size: 12px; color: var(--text3); background: none; border: none; cursor: pointer; padding: 0; }
+.removeBtn:hover { color: var(--accent); }
+.previewHead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.copyBtn { padding: 8px 14px; font-size: 13px; font-weight: 500; background: var(--accent); color: var(--on-accent); border: none; border-radius: var(--radius-sm); cursor: pointer; }
+.copyBtn:hover:not(:disabled) { opacity: 0.9; }
+.copyBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.preview { font-size: 12px; line-height: 1.6; color: var(--text2); white-space: pre-wrap; word-break: break-word; max-height: 480px; overflow-y: auto; margin: 0; font-family: 'DM Sans', sans-serif; }
+.previewSection { position: sticky; top: 24px; }
