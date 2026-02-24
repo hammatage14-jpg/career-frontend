@@ -28,6 +28,7 @@ export default function AdminDashboard() {
   const [editing, setEditing] = useState(null)
   const [form, setForm] = useState({ title: '', company: '', type: 'internship', description: '', location: '', duration: '', applicationFee: 350, isActive: true })
   const [refunding, setRefunding] = useState(null)
+  const [sendingReminder, setSendingReminder] = useState(null)
 
   useEffect(() => {
     dashboardService.getStats()
@@ -110,6 +111,16 @@ export default function AdminDashboard() {
       })
       .catch(err => alert(err.response?.data?.message || 'Refund failed'))
       .finally(() => setRefunding(null))
+  }
+
+  const handleSendReminder = (app) => {
+    setSendingReminder(app._id)
+    applicationService.sendReminderAdmin(app._id)
+      .then(() => {
+        alert(`Reminder sent to ${app.applicant?.email || 'applicant'}`)
+      })
+      .catch(err => alert(err.response?.data?.message || 'Failed to send reminder'))
+      .finally(() => setSendingReminder(null))
   }
 
   if (loading && !stats) {
@@ -287,6 +298,17 @@ export default function AdminDashboard() {
                           title="Refund to original payment method"
                         >
                           {refunding === app._id ? '…' : 'Refund'}
+                        </button>
+                      )}
+                      {app.status === 'pending_payment' && (
+                        <button
+                          type="button"
+                          className={styles.reminderBtn}
+                          onClick={() => handleSendReminder(app)}
+                          disabled={sendingReminder === app._id}
+                          title="Send reminder email to user"
+                        >
+                          {sendingReminder === app._id ? '…' : '📧 Remind'}
                         </button>
                       )}
                       {app.refundedAt && <span className={styles.refunded}>Refunded</span>}
