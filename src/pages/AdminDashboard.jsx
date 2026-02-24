@@ -2,12 +2,27 @@ import { useState, useEffect } from 'react'
 import { opportunityService, applicationService, dashboardService } from '../services/api'
 import styles from './AdminDashboard.module.css'
 
+const formatDate = (dateString) => {
+  if (!dateString) return '—'
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' + 
+         date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+}
+
+const formatDateShort = (dateString) => {
+  if (!dateString) return '—'
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null)
   const [opportunities, setOpportunities] = useState([])
   const [applications, setApplications] = useState([])
+  const [appStats, setAppStats] = useState(null)
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState('overview') // overview | opportunities | applications
+  const [appStatusFilter, setAppStatusFilter] = useState('all') // all | pending | completed
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState(null)
   const [form, setForm] = useState({ title: '', company: '', type: 'internship', description: '', location: '', duration: '', applicationFee: 350, isActive: true })
@@ -25,16 +40,17 @@ export default function AdminDashboard() {
     Promise.all([
       dashboardService.getStats().then(r => r.data).catch(() => null),
       opportunityService.getAdminAll({ limit: 50 }).then(r => r.data.opportunities || []).catch(() => []),
-      applicationService.getAllAdmin({ limit: 50 }).then(r => r.data.applications || []).catch(() => []),
-    ]).then(([s, opps, apps]) => {
+      dashboardService.getApplicationsStatus({ status: appStatusFilter === 'all' ? undefined : appStatusFilter, limit: 50 }).then(r => r.data).catch(() => ({ applications: [], stats: {} })),
+    ]).then(([s, opps, appsData]) => {
       if (!cancelled) {
         setStats(s)
         setOpportunities(opps)
-        setApplications(apps)
+        setApplications(appsData.applications)
+        setAppStats(appsData.stats)
       }
     }).finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
-  }, [])
+  }, [appStatusFilter])
 
   const handleCreateOrUpdate = (e) => {
     e.preventDefault()
@@ -189,66 +205,97 @@ export default function AdminDashboard() {
       )}
 
       {tab === 'applications' && (
-        <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Applicant</th>
-                <th>Opportunity</th>
-                <th>Documents</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {applications.map(app => (
-                <tr key={app._id}>
-                  <td>
-                    <div>{app.userId?.name ?? app.userId?.email ?? '—'}</div>
-                    {app.userId?.email && <div className={styles.email}>{app.userId.email}</div>}
-                  </td>
-                  <td>{app.opportunityId?.title ?? '—'} ({app.opportunityId?.company})</td>
-                  <td>
-                    <div className={styles.docLinks}>
-                      {app.resumeUrl && <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer" className={styles.docLink}>Resume</a>}
-                      {app.recommendationLetterUrl && <a href={app.recommendationLetterUrl} target="_blank" rel="noopener noreferrer" className={styles.docLink}>Letter</a>}
-                      {!app.resumeUrl && !app.recommendationLetterUrl && '—'}
-                    </div>
-                  </td>
-                  <td>
-                    {app.status === 'pending_payment' ? (
-                      <span className={`${styles.statusPill} ${styles.statusPillPending}`}>{statusLabel(app.status)}</span>
-                    ) : (
-                      <select
-                        className={`${styles.statusSelect} ${app.status === 'rejected' ? styles.statusSelectRed : styles.statusSelectGreen}`}
-                        value={app.status}
-                        onChange={(e) => handleStatusChange(app._id, e.target.value)}
-                      >
-                        {STATUS_OPTIONS.map(opt => (
-                          <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                      </select>
-                    )}
-                  </td>
-                  <td>
-                    {!app.refundedAt && app.status !== 'pending_payment' && app.paymentTransactionId && (
-                      <button
-                        type="button"
-                        className={styles.refundBtn}
-                        onClick={() => handleRefund(app)}
-                        disabled={refunding === app._id}
-                        title="Refund to original payment method"
-                      >
-                        {refunding === app._id ? '…' : 'Refund'}
-                      </button>
-                    )}
-                    {app.refundedAt && <span className={styles.refunded}>Refunded</span>}
-                  </td>
+        <>
+          <div className={styles.toolbar}>
+            <div className={styles.filterButtons}>
+              <button 
+                type="button" 
+                className={appStatusFilter === 'all' ? styles.btnActive : styles.btnSecondary}
+                onClick={() => setAppStatusFilter('all')}
+              >
+                All {applications.length > 0 && `(${applications.length})`}
+              </button>
+              <button 
+                type="button" 
+                className={appStatusFilter === 'pending' ? styles.btnActive : styles.btnSecondary}
+                onClick={() => setAppStatusFilter('pending')}
+              >
+                Pending {appStats?.pending > 0 && `(${appStats.pending})`}
+              </button>
+              <button 
+                type="button" 
+                className={appStatusFilter === 'completed' ? styles.btnActive : styles.btnSecondary}
+                onClick={() => setAppStatusFilter('completed')}
+              >
+                Completed {appStats?.completed > 0 && `(${appStats.completed})`}
+              </button>
+            </div>
+          </div>
+          <div className={styles.tableWrap}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Applicant</th>
+                  <th>Opportunity</th>
+                  <th>Status</th>
+                  <th>Started</th>
+                  <th>Updated</th>
+                  <th>Documents</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {applications.map(app => (
+                  <tr key={app._id}>
+                    <td>
+                      <div>{app.applicant?.name ?? app.applicant?.email ?? '—'}</div>
+                      {app.applicant?.email && <div className={styles.email}>{app.applicant.email}</div>}
+                    </td>
+                    <td>{app.opportunity?.title ?? '—'} ({app.opportunity?.company})</td>
+                    <td>
+                      {app.status === 'pending_payment' ? (
+                        <span className={`${styles.statusPill} ${styles.statusPillPending}`}>{statusLabel(app.status)}</span>
+                      ) : (
+                        <select
+                          className={`${styles.statusSelect} ${app.status === 'rejected' ? styles.statusSelectRed : styles.statusSelectGreen}`}
+                          value={app.status}
+                          onChange={(e) => handleStatusChange(app._id, e.target.value)}
+                        >
+                          {STATUS_OPTIONS.map(opt => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
+                        </select>
+                      )}
+                    </td>
+                    <td><small className={styles.timestamp}>{formatDateShort(app.createdAt)}</small></td>
+                    <td><small className={styles.timestamp}>{formatDateShort(app.updatedAt)}</small></td>
+                    <td>
+                      <div className={styles.docLinks}>
+                        {app.hasResume && <a href="#" className={styles.docLink}>Resume</a>}
+                        {app.hasCoverLetter && <a href="#" className={styles.docLink}>Letter</a>}
+                        {!app.hasResume && !app.hasCoverLetter && '—'}
+                      </div>
+                    </td>
+                    <td>
+                      {!app.refundedAt && app.status !== 'pending_payment' && app.amountPaid && (
+                        <button
+                          type="button"
+                          className={styles.refundBtn}
+                          onClick={() => handleRefund(app)}
+                          disabled={refunding === app._id}
+                          title="Refund to original payment method"
+                        >
+                          {refunding === app._id ? '…' : 'Refund'}
+                        </button>
+                      )}
+                      {app.refundedAt && <span className={styles.refunded}>Refunded</span>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   )

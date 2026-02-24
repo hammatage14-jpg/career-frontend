@@ -76,6 +76,7 @@ export const authService = {
 export const dashboardService = {
   getStats:    ()       => api.get('/dashboard/stats'),
   getActivity: (limit) => api.get('/dashboard/activity', { params: { limit } }),
+  getApplicationsStatus: (params) => api.get('/dashboard/applications-status', { params }),
 }
 
 // ══════════════════════════════════════════════════════════════
