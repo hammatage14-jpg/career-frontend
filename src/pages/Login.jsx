@@ -120,7 +120,7 @@ export default function Login({ onBack, mode: initialMode = 'login' }) {
             ← Back
           </button>
         )}
-        <div className={styles.logo}>IAS</div>
+        <div className={styles.logo}>CareerStart</div>
         <h1 className={styles.title}>
           {mode === 'login' ? 'Log in' : mode === 'forgot' ? 'Forgot password' : mode === 'verify' ? 'Verify email' : 'Sign up'}
         </h1>

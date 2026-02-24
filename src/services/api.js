@@ -1,5 +1,5 @@
 /**
- * IAS API Service Layer
+ * CareerStart API Service Layer
  * ─────────────────────────────────────────────────────────────────
  * All backend communication is centralised here.
  * Components never make direct fetch/axios calls — they use these
@@ -28,7 +28,7 @@ const api = axios.create({
 
 // ─── Request interceptor — attach auth token; allow FormData to set Content-Type ───────────────────
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('ias_token')
+  const token = localStorage.getItem('careerstart_token')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -43,8 +43,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      const hadToken = !!localStorage.getItem('ias_token')
-      localStorage.removeItem('ias_token')
+      const hadToken = !!localStorage.getItem('careerstart_token');
+      localStorage.removeItem('careerstart_token')
       // Only redirect if we had a token (session expired). Avoids reload loop when /auth/me returns 401 with no token.
       if (hadToken) {
         window.location.href = '/'

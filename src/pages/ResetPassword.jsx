@@ -55,7 +55,7 @@ export default function ResetPassword() {
         >
           ← Back
         </button>
-        <div className={styles.logo}>IAS</div>
+        <div className={styles.logo}>CareerStart</div>
         <h1 className={styles.title}>Set new password</h1>
         <p className={styles.sub}>
           {token ? 'Enter your new password below.' : 'This link is invalid or has expired.'}
