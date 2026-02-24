@@ -64,7 +64,7 @@ const STEPS = [
 
 const TESTIMONIALS = [
   {
-    quote: "I got my industrial attachment at Safaricom through IAS. The process took less than a week from application to confirmation. Incredible platform.",
+    quote: "I got my industrial attachment at Safaricom through CareerStart. The process took less than a week from application to confirmation. Incredible platform.",
     name: 'James Otieno',
     role: 'Computer Science, Year 3 — University of Nairobi',
     initials: 'KA',
@@ -72,7 +72,7 @@ const TESTIMONIALS = [
     bg: '#FFF3E0',
   },
   {
-    quote: "As a recruiter, IAS saves us enormous time. We post a role and get qualified, verified student applicants immediately. Highly recommend.",
+    quote: "As a recruiter, CareerStart saves us enormous time. We post a role and get qualified, verified student applicants immediately. Highly recommend.",
     name: 'Abena Mensah',
     role: 'Talent Lead — KCB Group',
     initials: 'AM',
@@ -133,8 +133,8 @@ function Navbar({ onEnterApp, onSignIn, onGetStarted }) {
       <div className={styles.navInner}>
         {/* Logo */}
         <div className={styles.navLogo}>
-          <div className={styles.logoMark}>IAS</div>
-          <span className={styles.logoText}>IAS Platform</span>
+          <div className={styles.logoMark}>CareerStart</div>
+          <span className={styles.logoText}>CareerStart</span>
         </div>
 
         {/* Desktop links */}
@@ -237,7 +237,7 @@ function Hero({ onEnterApp, onSignIn, onGetStarted }) {
         </h1>
 
         <p className={`${styles.heroSub} ${styles.fadeUp}`} style={{ animationDelay: '.20s' }}>
-          IAS connects students with leading companies across Kenya and beyond.
+          CareerStart connects students with leading companies across Kenya and beyond.
           Browse hundreds of verified opportunities, apply in minutes, and track
           every stage of your placement journey.
         </p>
@@ -397,7 +397,7 @@ function ForCompanies() {
           ))}
         </div>
         <div className={`${styles.sectionHeader} ${inView ? styles.fadeUp : ''}`} style={{ marginTop: '2rem' }}>
-          <a href="mailto:opportunity.app@gmail.com?subject=Company%20enquiry%20-%20Get%20started%20with%20IAS" className={styles.btnHeroPrimary}>Get started as a company</a>
+          <a href="mailto:opportunity.app@gmail.com?subject=Company%20enquiry%20-%20Get%20started%20with%20CareerStart" className={styles.btnHeroPrimary}>Get started as a company</a>
         </div>
       </div>
     </section>
@@ -412,9 +412,9 @@ function About() {
       <div className={styles.sectionInner}>
         <div className={`${styles.sectionHeader} ${inView ? styles.fadeUp : ''}`}>
           <div className={styles.eyebrow}>Who we are</div>
-          <h2 className={styles.sectionHeading}>About IAS</h2>
+          <h2 className={styles.sectionHeading}>About CareerStart</h2>
           <p className={styles.sectionSub}>
-            IAS (Industrial Attachment &amp; Internship Platform) connects Kenyan students and graduates with quality internship and industrial attachment opportunities. We work with leading employers across sectors to make placement simple, transparent and fair — so every student can find the right role and every company can find the right talent.
+            CareerStart is a premier platform connecting Kenyan students and graduates with quality internship and industrial attachment opportunities. We partner with leading employers across sectors to make placement simple, transparent and fair — so every student can find the right role and every company can find the right talent.
           </p>
           <p className={styles.sectionSub} style={{ marginTop: '1rem' }}>
             Our mission is to bridge the gap between education and industry, helping students gain real-world experience and companies build a pipeline of skilled talent.
@@ -497,7 +497,7 @@ function CTABanner({ onEnterApp, onSignIn, onGetStarted }) {
       <div className={styles.ctaOrb2} aria-hidden />
       <div className={`${styles.ctaInner} ${inView ? styles.fadeUp : ''}`}>
         <h2 className={styles.ctaHeading}>Your next opportunity<br />is waiting for you</h2>
-        <p className={styles.ctaSub}>Join thousands of students who found their internship or industrial attachment through IAS. It's free, fast, and built for you.</p>
+        <p className={styles.ctaSub}>Join thousands of students who found their internship or industrial attachment through CareerStart. It's free, fast, and built for you.</p>
         <div className={styles.ctaBtns}>
           <button className={styles.btnHeroPrimary} onClick={createAccount}>Sign up</button>
           <button className={styles.btnHeroGhost}   onClick={browse}>Login — you already have an account</button>
@@ -519,19 +519,19 @@ const PLATFORM_LINKS = [
 ]
 
 const COMPANIES_LINKS = [
-  { label: 'Post a Role', href: `mailto:${CONTACT_EMAIL}?subject=Post%20a%20Role%20-%20IAS%20Platform` },
+  { label: 'Post a Role', href: `mailto:${CONTACT_EMAIL}?subject=Post%20a%20Role%20-%20CareerStart` },
   { label: 'Find Talent', href: '#for-companies' },
-  { label: 'Partner with Us', href: `mailto:${CONTACT_EMAIL}?subject=Partner%20with%20Us%20-%20IAS%20Platform` },
-  { label: 'Pricing', href: `mailto:${CONTACT_EMAIL}?subject=Pricing%20enquiry%20-%20IAS%20Platform` },
+  { label: 'Partner with Us', href: `mailto:${CONTACT_EMAIL}?subject=Partner%20with%20Us%20-%20CareerStart` },
+  { label: 'Pricing', href: `mailto:${CONTACT_EMAIL}?subject=Pricing%20enquiry%20-%20CareerStart` },
   { label: 'Success Stories', href: '#testimonials' },
 ]
 
 const SUPPORT_LINKS = [
   { label: 'Help Centre', href: '#how-it-works' },
-  { label: 'Contact Us', href: `mailto:${CONTACT_EMAIL}?subject=Contact%20Us%20-%20IAS%20Platform` },
-  { label: 'Privacy Policy', href: `mailto:${CONTACT_EMAIL}?subject=Privacy%20Policy%20-%20IAS%20Platform` },
-  { label: 'Terms of Service', href: `mailto:${CONTACT_EMAIL}?subject=Terms%20of%20Service%20-%20IAS%20Platform` },
-  { label: 'Cookie Policy', href: `mailto:${CONTACT_EMAIL}?subject=Cookie%20Policy%20-%20IAS%20Platform` },
+  { label: 'Contact Us', href: `mailto:${CONTACT_EMAIL}?subject=Contact%20Us%20-%20CareerStart` },
+  { label: 'Privacy Policy', href: `mailto:${CONTACT_EMAIL}?subject=Privacy%20Policy%20-%20CareerStart` },
+  { label: 'Terms of Service', href: `mailto:${CONTACT_EMAIL}?subject=Terms%20of%20Service%20-%20CareerStart` },
+  { label: 'Cookie Policy', href: `mailto:${CONTACT_EMAIL}?subject=Cookie%20Policy%20-%20CareerStart` },
 ]
 
 function Footer() {
@@ -540,8 +540,8 @@ function Footer() {
       <div className={styles.footerInner}>
         <div className={styles.footerBrand}>
           <div className={styles.footerLogo}>
-            <div className={styles.logoMark}>IAS</div>
-            <span className={styles.logoText}>IAS Platform</span>
+            <div className={styles.logoMark}>CareerStart</div>
+            <span className={styles.logoText}>CareerStart</span>
           </div>
           <p className={styles.footerTagline}>Connecting students with quality internship and industrial attachment opportunities across Kenya and beyond.</p>
         </div>
@@ -569,7 +569,7 @@ function Footer() {
       </div>
 
       <div className={styles.footerBottom}>
-        <span>© {new Date().getFullYear()} IAS Platform. All Rights Reserved.</span>
+        <span>© {new Date().getFullYear()} CareerStart. All Rights Reserved.</span>
       </div>
     </footer>
   )
