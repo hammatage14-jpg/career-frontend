@@ -12,7 +12,8 @@ const formatDate = (dateString) => {
 const formatDateShort = (dateString) => {
   if (!dateString) return '—'
   const date = new Date(dateString)
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' + 
+         date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
 }
 
 export default function AdminDashboard() {
