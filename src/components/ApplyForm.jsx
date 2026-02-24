@@ -96,7 +96,7 @@ export default function ApplyForm({ opportunity, onSuccess, onCancel }) {
             <div className={styles.actions}>
               <button type="button" className={styles.btnSecondary} onClick={onCancel}>Cancel</button>
               <button type="submit" className={styles.btnPrimary} disabled={loading || !canSubmit}>
-                {loading ? 'Submitting…' : `Submit & Pay KES ${fee}`}
+                {loading ? 'Processing…' : `Pay & Submit (KES ${fee})`}
               </button>
             </div>
           </form>
